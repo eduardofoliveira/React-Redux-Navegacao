@@ -5,7 +5,7 @@ import { Creators as LoginActions } from '../ducks/login';
 
 export function* login() {
   try {
-    yield put(push('/profile'));
+    yield put(push('/'));
 
     yield put(LoginActions.loginSuccess('Usuário logado com sucesso !'));
   } catch (error) {

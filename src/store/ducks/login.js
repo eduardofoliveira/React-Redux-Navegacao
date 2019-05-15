@@ -13,7 +13,7 @@ export const Types = {
 const INITIAL_STATE = {
   logged: false,
   user_account: null,
-  error: null,
+  error: '',
 };
 
 export default function login(state = INITIAL_STATE, action) {
@@ -24,8 +24,8 @@ export default function login(state = INITIAL_STATE, action) {
       return {
         ...state,
         logged: true,
-        user_account: action.payload.user,
-        error: null,
+        user_account: action.payload.msg,
+        error: '',
       };
     case Types.LOGIN_FAILURE:
       return {
