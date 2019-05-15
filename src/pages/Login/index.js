@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Creators as LoginActions } from '../../store/ducks/login';
+
+import { isAuthenticated } from '../../services/auth';
 
 import Logo from '../../assets/logo.svg';
 
@@ -50,6 +53,8 @@ class Login extends Component {
 
     return (
       <Container>
+        {isAuthenticated() && <Redirect to="/app" />}
+
         <Form onSubmit={this.handleSignIn}>
           <h2>Cloudcom</h2>
           <h2>PromptMode</h2>

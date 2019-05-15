@@ -24,7 +24,7 @@ export default function login(state = INITIAL_STATE, action) {
       return {
         ...state,
         logged: true,
-        user_account: action.payload.msg,
+        user_account: action.payload.user,
         error: '',
       };
     case Types.LOGIN_FAILURE:
@@ -48,9 +48,9 @@ export const Creators = {
     payload: { user },
   }),
 
-  loginSuccess: msg => ({
+  loginSuccess: user => ({
     type: Types.LOGIN_SUCCESS,
-    payload: { msg },
+    payload: { user },
   }),
 
   loginFailure: error => ({
