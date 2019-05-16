@@ -10,6 +10,7 @@ import { Container, Header } from './styles';
 import ListUsers from '../../components/ListUsers';
 import AddUser from '../../components/AddUser';
 import EditUser from '../../components/EditUser';
+import ListDomain from '../../components/ListDomain';
 
 class Main extends Component {
   state = {};
@@ -43,6 +44,7 @@ class Main extends Component {
           <Route exact path="/app/users" component={ListUsers} />
           <Route exact path="/app/users/add" component={AddUser} />
           <Route exact path="/app/users/:id" component={EditUser} />
+          <Route exact path="/app/domains" component={ListDomain} />
         </Switch>
       </Container>
     );
