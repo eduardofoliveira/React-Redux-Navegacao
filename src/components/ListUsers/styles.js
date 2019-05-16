@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  padding: 10px;
+  width: 100%;
+`;
+
 export const Table = styled.table`
   border-collapse: collapse;
   background-color: #2196f3;
   border-radius: 5px;
-  margin: 10px;
+  margin-top: 10px;
   padding: 10px;
+  width: 100%;
 
   tbody td {
     border-bottom: 1px solid #0961aa;
@@ -36,7 +42,6 @@ export const Table = styled.table`
 `;
 
 export const Button = styled.button`
-  margin: 10px 10px 0px 10px;
   background-color: #2196f3;
   border-radius: 5px;
   border: none;
@@ -48,6 +53,7 @@ export const Button = styled.button`
   display: inline-block;
   font-size: 16px;
   border: 2px solid transparent;
+  cursor: pointer;
 
   &&:hover {
     background-color: #0b7dda;

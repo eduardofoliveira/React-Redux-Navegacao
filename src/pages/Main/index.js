@@ -6,6 +6,7 @@ import UserIcon from '../../assets/user.svg';
 import { Container, Header } from './styles';
 
 import ListUsers from '../../components/ListUsers';
+import AddUser from '../../components/AddUser';
 
 class Main extends Component {
   state = {};
@@ -26,6 +27,7 @@ class Main extends Component {
         </Header>
         <Switch>
           <Route exact path="/app/users" component={ListUsers} />
+          <Route exact path="/app/users/add" component={AddUser} />
         </Switch>
       </Container>
     );
