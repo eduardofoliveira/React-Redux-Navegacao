@@ -8,22 +8,32 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   display: flex;
-  align-items: center;
-  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
   height: 70px;
+  width: 100%;
   background-color: #2196f3;
 
-  a {
+  div.start {
+    display: flex;
+    align-items: center;
+  }
+
+  div.end {
+    display: flex;
+    align-items: center;
+  }
+
+  div a {
     display: block;
-    height: 80%;
     padding: 5px;
   }
 
-  img {
-    height: 100%;
+  div img {
+    height: 50px;
   }
 
-  h2 {
+  div h2 {
     padding-left: 25px;
     padding-right: 25px;
     font-family: 'Asap', sans-serif;

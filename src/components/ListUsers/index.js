@@ -41,9 +41,11 @@ class ListUsers extends Component {
                 <td>{item.email}</td>
                 <td>{item.createdAt}</td>
                 <td>
-                  <button type="button">
-                    <img src={editIcon} alt="Editar item" />
-                  </button>
+                  <Link to={`/app/users/${item.id}`}>
+                    <button type="button">
+                      <img src={editIcon} alt="Editar item" />
+                    </button>
+                  </Link>
 
                   <button
                     type="button"

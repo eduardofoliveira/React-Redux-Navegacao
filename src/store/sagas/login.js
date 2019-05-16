@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import api from '../../services/api';
-import { setToken } from '../../services/auth';
+import { setToken, delToken } from '../../services/auth';
 
 import { Creators as LoginActions } from '../ducks/login';
 
@@ -31,4 +31,10 @@ export function* login(action) {
       yield put(LoginActions.loginFailure('Erro ao conectar com servidor'));
     }
   }
+}
+
+export function* logout() {
+  delToken();
+  yield put(LoginActions.logoutSuccess());
+  yield put(push('/login'));
 }

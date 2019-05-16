@@ -9,6 +9,7 @@ import Main from '../pages/Main';
 import Profile from '../pages/Profile';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
+import Logout from '../pages/Logout';
 
 import history from './history';
 
@@ -32,7 +33,8 @@ const Routes = () => (
       <Route exact path="/" component={App} />
       <PrivateRoute path="/app" component={Main} />
       <PrivateRoute path="/profile" component={Profile} />
-      <Route path="/login" component={Login} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/logout" component={Logout} />
       <Route path="*" component={NotFound} />
     </Switch>
   </ConnectedRouter>

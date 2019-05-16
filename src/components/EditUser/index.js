@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Creators as usuariosActions } from '../../store/ducks/usuarios';
+import api from '../../services/api';
 
 import { Container, Form, ButtonContainer } from './styles';
 
-class AddUser extends Component {
+class EditUser extends Component {
   constructor(props) {
     super(props);
 
@@ -24,25 +25,44 @@ class AddUser extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentDidMount = async () => {
+    const { match } = this.props;
+    const { data } = await api.get(`/user/${match.params.id}`);
+
+    this.setState({
+      nome: data.nome,
+      email: data.email,
+    });
+  };
+
   handleAdd = async (event) => {
     event.preventDefault();
 
-    const { addUserFailure, addUserRequest } = this.props;
+    const { addUserFailure, editUserRequest, match } = this.props;
     const {
       nome, email, senha, senhaConf,
     } = this.state;
 
-    if (!nome || !email || !senha || !senhaConf) {
+    if (nome && email && !senha && !senhaConf) {
+      const user = {
+        id: match.params.id,
+        nome,
+        email,
+      };
+
+      editUserRequest(user);
+    } else if (!nome || !email || !senha || !senhaConf) {
       addUserFailure('Preencher todos os campos');
     } else if (senha !== senhaConf) {
       addUserFailure('As senhas não são iguais');
     } else {
       const user = {
+        id: match.params.id,
         nome,
         email,
         password: senha,
       };
-      addUserRequest(user);
+      editUserRequest(user);
     }
   };
 
@@ -58,18 +78,32 @@ class AddUser extends Component {
 
   render() {
     const { error } = this.props;
+    const { nome, email } = this.state;
+
     return (
       <Container>
         <Form onSubmit={this.handleAdd}>
           {error && <p>{error}</p>}
           <div>
             <label htmlFor="nome">Nome:</label>
-            <input id="nome" name="nome" type="text" onChange={this.handleInputChange} />
+            <input
+              id="nome"
+              name="nome"
+              type="text"
+              onChange={this.handleInputChange}
+              value={nome}
+            />
           </div>
 
           <div>
             <label htmlFor="email">E-mail:</label>
-            <input id="email" name="email" type="email" onChange={this.handleInputChange} />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              onChange={this.handleInputChange}
+              value={email}
+            />
           </div>
 
           <div>
@@ -88,7 +122,7 @@ class AddUser extends Component {
           </div>
 
           <ButtonContainer>
-            <button type="submit">Adicionar</button>
+            <button type="submit">Alterar</button>
             <Link to="/app/users">
               <button type="submit">Voltar</button>
             </Link>
@@ -99,10 +133,15 @@ class AddUser extends Component {
   }
 }
 
-AddUser.propTypes = {
+EditUser.propTypes = {
   error: PropTypes.string.isRequired,
   addUserFailure: PropTypes.func.isRequired,
-  addUserRequest: PropTypes.func.isRequired,
+  editUserRequest: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -114,4 +153,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(usuariosActions, dispa
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddUser);
+)(EditUser);
